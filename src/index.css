@@ -15,15 +15,6 @@ body {
   background: linear-gradient(#f4f0ff, #dacdff);
 }
 
-.chatbot-popup{
-  position: relative;
-  background: #fff;
-  width: 420px;
-  overflow: hidden;
-  border-radius: 15px;
-  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1), 0 32px 64px -48px rgba(0,0,0,0.5);
-}
-
 .chatbot-popup .chat-header{
   display: flex;
   justify-content: space-between;
@@ -81,6 +72,56 @@ body {
   scrollbar-color: #ddd3f9 transparent;
 }
 
+#chatbot-toggler{
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  border: none;
+  height: 50px;
+  width: 50px;
+  display: flex;
+  cursor: pointer;
+  border-radius: 50%;
+  background: #6d4fc2;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+#chatbot-toggler span{
+  position: absolute;
+  color: #fff;
+}
+.chatbot-popup{
+  position: fixed;
+  bottom: 90px;
+  right: 35px;
+  opacity: 0;
+  pointer-events: none;
+  background: #fff;
+  transform: scale(0.2);
+  transform-origin: bottom right;
+  width: 420px;
+  overflow: hidden;
+  border-radius: 15px;
+  transition: all 0.1s ease;
+  box-shadow: 0 0 128px 0 rgba(0,0,0,0.1), 0 32px 64px -48px rgba(0,0,0,0.5);
+}
+.container.show-chatbot .chatbot-popup {
+  opacity: 1;
+  pointer-events: auto;
+  transform: scale(1);
+}
+.container.show-chatbot #chatbot-toggler span{
+  transform: rotate(90deg);
+}
+#chatbot-toggler span:last-child,
+.container.show-chatbot #chatbot-toggler span:first-child{
+  opacity: 0;
+}
+.container.show-chatbot #chatbot-toggler span:last-child{
+  opacity: 1;
+}
 .chat-body .message{
   display: flex;
   align-items: center;
@@ -164,4 +205,29 @@ body {
 }
 .chat-form .message-input:valid~button{
   display: block;
+}
+
+/*Responsive media query*/
+@media(max-width: 520px){
+  #chatbot-toggler{
+    right: 20px;
+    bottom: 20px;
+  }
+  .chatbot-popup{
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    border-radius: 0;
+    width: 100%;
+  }
+  .chatbot-popup .chat-header{
+    padding: 12px 15px;
+  }
+  .chat-body{
+    height: calc(90%-55px);
+    padding: 25px 15px;
+  }
+  .chat-footer{
+    padding: 10px 15px 15px;
+  }
 }
